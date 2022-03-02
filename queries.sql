@@ -89,6 +89,8 @@ SET weight_kg = weight_kg * -1;
 --Rollback to the savepoint
 ROLLBACK TO SP1;
 
+SELECT * FROM animals;
+
 --Commit transaction
 COMMIT;
 
