@@ -31,9 +31,9 @@ cd vet-clinic
 code .
 ```
 
-## Authors
+## Author
 
-👤 **Mongare S.**
+👤 **Victor Chukwuemeka**
 
 - GitHub: [@githubhandle](https://github.com/chukwuemeka1234/)
 - Twitter: [@twitterhandle](https://twitter.com/@avc_victor)
