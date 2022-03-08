@@ -86,3 +86,15 @@ CREATE TABLE visits (
 	FOREIGN KEY (vets_id) REFERENCES vets (id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	PRIMARY KEY (date_of_visit, animal_id, vets_id)
 );
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+-- To decrease the first query time
+CREATE INDEX animal_visit ON visits(animal_id desc);
+
+-- To decrease the second query time
+CREATE INDEX vet_visit ON visits(vet_id asc);
+
+--  To decrease the third query:
+CREATE INDEX owner_id ON owners(email desc);

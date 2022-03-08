@@ -9,7 +9,7 @@ VALUES ('Gabumon', '2018-11-15', 8.0, true, 2);
 INSERT INTO animals (name, date_of_birth, weight_kg, neutered, escape_attempts)
 VALUES ('Pikachu', '2021-01-07', 15.04, false, 1);
 
-INSERT INTO animals (name, date_of_birth, weight_kg, neutered, 
+INSERT INTO animals (name, date_of_birth, weight_kg, neutered,
 escape_attempts)
 VALUES ('Devimon', '2017-05-12', 11.00, true, 5);
 
@@ -66,16 +66,16 @@ VALUES('Digimon');
 
     -- If the name ends in "mon" it will be Digimon
 
-    UPDATE animals 
-    SET 
+    UPDATE animals
+    SET
         species_id = 2
     WHERE
         name LIKE '%mon';
 
     -- All other animals are Pokemon
 
-    UPDATE animals 
-    SET 
+    UPDATE animals
+    SET
         species_id = 1
     WHERE
         species_id IS NULL;
@@ -83,36 +83,36 @@ VALUES('Digimon');
     -- Modify your inserted animals to include owner information (owner_id):
 
     -- Sam Smith owns Agumon.
-    UPDATE animals 
-    SET 
+    UPDATE animals
+    SET
         owner_id = 1
     WHERE
         name='Agumon';
 
-    -- Jennifer Orwell owns Gabumon and Pikachu.    
-     UPDATE animals 
-    SET 
+    -- Jennifer Orwell owns Gabumon and Pikachu.
+     UPDATE animals
+    SET
         owner_id = 2
     WHERE
         name='Gabumon' OR name='Pikachu';
 
 -- Bob owns Devimon and Plantmon.
-     UPDATE animals 
-    SET 
+     UPDATE animals
+    SET
         owner_id = 3
     WHERE
         name='Devimon' OR name='Plantmon';
-    
+
     -- Melody Pond owns Charmander, Squirtle, and Blossom.
-     UPDATE animals 
-    SET 
+     UPDATE animals
+    SET
         owner_id = 4
     WHERE
         name='Charmander' OR name='Squirtle' OR name='Blossom';
 
     -- Dean Winchester owns Angemon and Boarmon.
-     UPDATE animals 
-    SET 
+     UPDATE animals
+    SET
         owner_id = 5
     WHERE
         name='Angemon' OR name='Boarmon';
@@ -203,3 +203,14 @@ VALUES('Digimon');
 
     INSERT INTO visits (animal_id, vets_id, date_of_visit)
     VALUES(9, 1, '2021-01-11');
+
+
+/****/
+-- This will add 3.594.280 visits considering you have 10 animals, 4 vets, and it will use around ~87.000 timestamps (~4min approx.)
+INSERT INTO visits (animal_id, vet_id, date_of_visit)
+SELECT * FROM (SELECT id FROM animals) animal_ids,
+(SELECT id FROM vets) vets_ids, generate_series('1980-01-01'::timestamp, '2021-01-01', '4 hours') visit_timestamp;
+
+-- This will add 2.500.000 owners with full_name = 'Owner <X>' and email = 'owner_<X>@email.com' (~2min approx.)
+insert into owners (full_name, email)
+select 'Owner ' || generate_series(1,2500000), 'owner_' || generate_series(1,2500000) || '@mail.com';
