@@ -86,3 +86,6 @@ CREATE TABLE visits (
 	FOREIGN KEY (vets_id) REFERENCES vets (id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	PRIMARY KEY (date_of_visit, animal_id, vets_id)
 );
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
